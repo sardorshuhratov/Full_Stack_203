@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16-dars | DOM2</title>
+
+    <style>
+        .dark {
+            background-color: black;
+            color: white;
+        }
+
+        .grey {
+            background-color: lightgray;
+            color: black;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Amaliyot</h1>
+    <div id="box"></div>
+    <button onclick="send()">Yuborish</button>
+    <button onclick="changeTheme()" style="width: 100px; height: 50px; color: red;background-color: rgb(191, 149, 231);border-radius: 50%; border: none; font-size: 15px;">Dark / light</button>
+    <hr>
+    <div>
+        <input type="text" id="task">
+        <button onclick="addTask()">Qo'shish</button>
+        <p id = 'message'> Lorem ipsum dolor sit.</p>
+    </div>
+    <ul id="taskList">
+
+    </ul>
+
+    <script src="./app.js"></script>
+</body>
+</html>
