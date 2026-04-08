@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="uz">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tech House - Demo Store</title>
+  <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem('techhouse_theme_v1');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', savedTheme || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg-start: #f7f9fc;
+      --bg-end: #eef3f9;
+      --bg-orb-a: rgba(15, 98, 254, .16);
+      --bg-orb-b: rgba(28, 166, 122, .10);
+      --surface: rgba(255, 255, 255, .88);
+      --surface-strong: rgba(255, 255, 255, .8);
+      --text: #172033;
+      --muted: #60708f;
+      --line: rgba(23, 32, 51, .09);
+      --brand: #0f62fe;
+      --brand-deep: #1137a6;
+      --accent: #1ca67a;
+      --shadow: 0 20px 50px rgba(17, 55, 166, .10);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --nav-line: rgba(255, 255, 255, .5);
+      --footer-start: #1b2434;
+      --footer-end: #111826;
+      --footer-text: #eef4ff;
+      --footer-muted: rgba(255, 255, 255, .66);
+      --footer-pill-bg: rgba(255, 255, 255, .06);
+      --footer-pill-border: rgba(255, 255, 255, .08);
+      --footer-icon: #78abff;
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg-start: #0d1422;
+      --bg-end: #101a2e;
+      --bg-orb-a: rgba(72, 123, 255, .18);
+      --bg-orb-b: rgba(28, 166, 122, .12);
+      --surface: rgba(19, 28, 45, .86);
+      --surface-strong: rgba(18, 27, 43, .82);
+      --text: #eaf1ff;
+      --muted: #9cafcf;
+      --line: rgba(255, 255, 255, .08);
+      --shadow: 0 20px 50px rgba(0, 0, 0, .28);
+      --nav-line: rgba(255, 255, 255, .08);
+      --footer-start: #0f1727;
+      --footer-end: #0a1120;
+      --footer-text: #eef4ff;
+      --footer-muted: rgba(255, 255, 255, .62);
+      --footer-pill-bg: rgba(255, 255, 255, .05);
+      --footer-pill-border: rgba(255, 255, 255, .08);
+      --footer-icon: #8ab4ff;
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, var(--bg-orb-a), transparent 30%),
+        radial-gradient(circle at top right, var(--bg-orb-b), transparent 24%),
+        linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+      padding-top: 88px;
+      min-height: 100vh;
+      transition: background .25s ease, color .25s ease;
+    }
+
+    .page-shell {
+      max-width: 1480px;
+    }
+
+    .glass-nav {
+      background: var(--surface-strong) !important;
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--nav-line);
+    }
+
+    .navbar-brand {
+      letter-spacing: -.03em;
+      color: var(--text) !important;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, .22), transparent 26%),
+        linear-gradient(135deg, #0d47c8 0%, #0f62fe 42%, #26b38a 100%);
+      color: #fff;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -70px -80px auto;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .45rem .8rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .14);
+      border: 1px solid rgba(255, 255, 255, .18);
+      font-size: .85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 1.02;
+      letter-spacing: -.05em;
+    }
+
+    .hero p {
+      max-width: 42rem;
+      color: rgba(255, 255, 255, .84);
+      font-size: 1.05rem;
+    }
+
+    .hero-stat,
+    .quick-panel,
+    .filters-card,
+    .product-card,
+    .modal-content {
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-stat {
+      background: rgba(255, 255, 255, .12);
+      border-radius: 18px;
+      padding: 1rem 1.1rem;
+      min-width: 130px;
+    }
+
+    .hero-stat .value {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .quick-panel,
+    .filters-card,
+    .product-card,
+    .modal-content {
+      background: var(--surface);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius-lg);
+    }
+
+    .quick-panel {
+      padding: 1rem 1.1rem;
+      height: 100%;
+    }
+
+    .quick-panel .label {
+      color: var(--muted);
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 700;
+    }
+
+    .promo-banner {
+      border: none;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(15, 98, 254, .12), rgba(28, 166, 122, .14));
+      color: var(--text);
+    }
+
+    .section-heading h2 {
+      letter-spacing: -.04em;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .55rem .9rem;
+      border-radius: 999px;
+      background: rgba(23, 32, 51, .05);
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(28, 166, 122, .12);
+    }
+
+    .filters-card {
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-wrap {
+      position: relative;
+    }
+
+    .search-wrap i {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    .search-wrap .form-control {
+      padding-left: 2.7rem;
+    }
+
+    .form-control,
+    .form-select,
+    .btn {
+      border-radius: 14px;
+    }
+
+    .form-control,
+    .form-select {
+      border-color: rgba(17, 55, 166, .12);
+      min-height: 48px;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: rgba(15, 98, 254, .45);
+      box-shadow: 0 0 0 .25rem rgba(15, 98, 254, .12);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand), var(--brand-deep));
+      border: none;
+      box-shadow: 0 12px 24px rgba(15, 98, 254, .20);
+    }
+
+    .product-card {
+      padding: .75rem;
+      transition: transform .25s ease, box-shadow .25s ease;
+      height: 100%;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 40px rgba(17, 55, 166, .14);
+    }
+
+    .product-media {
+      overflow: hidden;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(15, 98, 254, .10), rgba(28, 166, 122, .08));
+      margin-bottom: .9rem;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .32rem .65rem;
+      border-radius: 999px;
+      background: rgba(15, 98, 254, .08);
+      color: var(--brand-deep);
+      font-size: .76rem;
+      font-weight: 700;
+      text-transform: capitalize;
+    }
+
+    .product-desc {
+      color: var(--muted);
+      min-height: 48px;
+    }
+
+    .price-tag {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .empty-state {
+      padding: 3rem 1.5rem;
+      text-align: center;
+      border: 1px dashed rgba(15, 98, 254, .18);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, .55);
+      color: var(--muted);
+    }
+
+    .modal-dialog {
+      padding: .75rem;
+    }
+
+    .modal-content {
+      border: 1px solid rgba(17, 55, 166, .10);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      background: linear-gradient(180deg, rgba(15, 98, 254, .08), rgba(255, 255, 255, .2));
+      border-bottom-color: rgba(17, 55, 166, .08);
+    }
+
+    .btn-close {
+      filter: none;
+      opacity: .72;
+    }
+
+    .btn-close:hover {
+      opacity: 1;
+    }
+
+    .modal-footer {
+      border-top-color: rgba(17, 55, 166, .08);
+    }
+
+    .theme-toggle {
+      min-width: 44px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-wrap {
+      padding-bottom: 2rem;
+    }
+
+    .footer-shell {
+      margin-top: 1.5rem;
+      background: linear-gradient(180deg, var(--footer-start) 0%, var(--footer-end) 100%);
+      color: var(--footer-text);
+      border-top: 1px solid var(--footer-pill-border);
+      border-radius: 0;
+    }
+
+    .footer-brand-mark {
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: var(--footer-pill-border);
+      color: #ffffff;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .footer-brand-copy .text-muted {
+      line-height: 1.25;
+    }
+
+    .footer-link {
+      color: var(--footer-muted);
+      text-decoration: none;
+    }
+
+    .footer-link:hover {
+      color: #ffffff;
+    }
+
+    .footer-pill {
+      padding: .45rem .65rem;
+      border-radius: 12px;
+      background: var(--footer-pill-bg);
+      border: 1px solid var(--footer-pill-border);
+      color: var(--footer-text);
+      font-weight: 600;
+      font-size: .84rem;
+    }
+
+    .footer-pill i {
+      color: var(--footer-icon);
+      font-size: .95rem;
+    }
+
+    .footer-note {
+      color: var(--footer-muted);
+      font-size: .8rem;
+    }
+
+    .footer-shell .text-muted {
+      color: var(--footer-muted) !important;
+    }
+
+    .product-detail-img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 18px;
+      background: rgba(15, 98, 254, .08);
+    }
+
+    .product-detail-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .45rem .7rem;
+      border-radius: 999px;
+      background: rgba(15, 98, 254, .08);
+      color: var(--brand-deep);
+      font-size: .85rem;
+      font-weight: 700;
+    }
+
+    :root[data-theme="dark"] .nav-link,
+    :root[data-theme="dark"] .form-label,
+    :root[data-theme="dark"] .text-muted,
+    :root[data-theme="dark"] .card-text {
+      color: var(--muted) !important;
+    }
+
+    :root[data-theme="dark"] .navbar-brand,
+    :root[data-theme="dark"] .card-title,
+    :root[data-theme="dark"] .price-tag,
+    :root[data-theme="dark"] .quick-panel .fw-bold,
+    :root[data-theme="dark"] .hero-stat .value,
+    :root[data-theme="dark"] .fw-semibold,
+    :root[data-theme="dark"] h1,
+    :root[data-theme="dark"] h2,
+    :root[data-theme="dark"] h5 {
+      color: var(--text) !important;
+    }
+
+    :root[data-theme="dark"] .product-chip {
+      background: rgba(138, 180, 255, .14);
+      color: #cfe0ff;
+    }
+
+    :root[data-theme="dark"] .product-detail-meta {
+      background: rgba(138, 180, 255, .14);
+      color: #cfe0ff;
+    }
+
+    :root[data-theme="dark"] .btn-outline-secondary,
+    :root[data-theme="dark"] .btn-outline-primary,
+    :root[data-theme="dark"] .btn-outline-success,
+    :root[data-theme="dark"] .btn-outline-danger {
+      color: var(--text);
+      border-color: rgba(255, 255, 255, .14);
+    }
+
+    :root[data-theme="dark"] .btn-outline-secondary:hover,
+    :root[data-theme="dark"] .btn-outline-primary:hover,
+    :root[data-theme="dark"] .btn-outline-success:hover,
+    :root[data-theme="dark"] .btn-outline-danger:hover {
+      background: rgba(255, 255, 255, .08);
+      color: #fff;
+    }
+
+    :root[data-theme="dark"] .promo-banner {
+      background: linear-gradient(135deg, rgba(72, 123, 255, .18), rgba(28, 166, 122, .16));
+      color: var(--text);
+    }
+
+    :root[data-theme="dark"] .form-control,
+    :root[data-theme="dark"] .form-select {
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      border-color: rgba(255,255,255,.12);
+    }
+
+    :root[data-theme="dark"] .form-control::placeholder {
+      color: var(--muted);
+    }
+
+    :root[data-theme="dark"] .btn-light {
+      background: rgba(255,255,255,.92);
+      border-color: rgba(255,255,255,.92);
+      color: #0f1727;
+    }
+
+    :root[data-theme="dark"] .btn-outline-light {
+      color: #fff;
+      border-color: rgba(255,255,255,.24);
+    }
+
+    :root[data-theme="dark"] .badge.text-bg-light {
+      background: rgba(255,255,255,.12) !important;
+      color: #fff !important;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    :root[data-theme="dark"] .modal-header {
+      background: linear-gradient(180deg, rgba(72, 123, 255, .12), rgba(20, 28, 43, .28));
+      border-bottom-color: rgba(255,255,255,.08);
+    }
+
+    :root[data-theme="dark"] .btn-close {
+      filter: invert(1) grayscale(100%) brightness(200%);
+      opacity: .88;
+    }
+
+    :root[data-theme="dark"] .btn-close:hover {
+      opacity: 1;
+    }
+
+    :root[data-theme="dark"] .modal-footer {
+      border-top-color: rgba(255,255,255,.08);
+    }
+
+    :root[data-theme="dark"] .footer-shell .text-muted,
+    :root[data-theme="dark"] .footer-shell .footer-note,
+    :root[data-theme="dark"] .footer-shell .footer-link {
+      color: var(--footer-muted) !important;
+    }
+
+    :root[data-theme="dark"] .footer-shell .footer-link:hover {
+      color: #ffffff !important;
+    }
+
+    @media (max-width: 991.98px) {
+      body {
+        padding-top: 76px;
+      }
+
+      .hero,
+      .filters-card,
+      .quick-panel,
+      .product-card {
+        border-radius: 20px;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .status-pill {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .modal-dialog {
+        margin: .35rem;
+        padding: 0;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .hero {
+        padding: 1.25rem !important;
+      }
+
+      .hero p,
+      .quick-panel .text-muted,
+      .product-desc {
+        font-size: .94rem;
+      }
+
+      .page-shell {
+        padding-left: .9rem;
+        padding-right: .9rem;
+      }
+
+      .navbar .btn,
+      .navbar .nav-link {
+        font-size: .92rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light shadow-sm fixed-top glass-nav">
+    <div class="container page-shell">
+      <a class="navbar-brand fw-bold fs-4" href="#">Tech House</a>
+      <div class="d-flex align-items-center ms-auto flex-wrap gap-2 justify-content-end">
+        <a class="nav-link" href="#about">Haqida</a>
+        <a class="nav-link" href="#promotions">Aksiyalar</a>
+        <button id="ordersBtn" class="btn btn-outline-secondary">Buyurtmalar</button>
+        <button id="loginBtn" class="btn btn-outline-primary" data-bs-toggle="modal"
+          data-bs-target="#loginModal">Kirish</button>
+        <button id="logoutBtn" class="btn btn-outline-danger d-none">Chiqish</button>
+        <button id="registerBtn" class="btn btn-outline-success" data-bs-toggle="modal"
+          data-bs-target="#registerModal">Ro'yxatdan o'tish</button>
+        <button id="themeToggle" class="btn btn-outline-secondary theme-toggle" type="button" aria-label="Theme almashtirish">
+          <i class="bi bi-moon-stars"></i>
+        </button>
+        <button id="cartBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cartModal">
+          <i class="bi bi-cart3 me-1"></i> Savat <span class="badge text-bg-light ms-1" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1080;"></div>
+
+  <div class="container page-shell py-4 footer-wrap">
+    <section id="about" class="hero p-4 p-lg-5 mb-4">
+      <div class="row align-items-center g-4 position-relative">
+        <div class="col-lg-7">
+          <div class="eyebrow mb-3"><i class="bi bi-stars"></i> Zamonaviy xarid tajribasi</div>
+          <h1 class="mb-3">Kerakli texnikani tezroq toping va silliq oqimda xarid qiling.</h1>
+          <p class="mb-4">Laptop, telefon va aksessuarlarni bitta aniq vitrinda ko'ring. Qidiring, taqqoslang va
+            savatdan checkout'gacha ortiqcha chalkashliksiz o'ting.</p>
+          <div class="d-flex flex-wrap gap-2">
+            <button id="checkoutTop" class="btn btn-light btn-lg px-4">Savatni ochish</button>
+            <a href="#productsSection" class="btn btn-outline-light btn-lg px-4">Mahsulotlarni ko'rish</a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="hero-stat">
+                <div class="text-uppercase small opacity-75">Bo'limlar</div>
+                <div class="value">3</div>
+                <div class="small opacity-75">Laptop, telefon, aksessuar</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="hero-stat">
+                <div class="text-uppercase small opacity-75">Checkout</div>
+                <div class="value">Tez</div>
+                <div class="small opacity-75">Qulay modal oqimi</div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="hero-stat">
+                <div class="text-uppercase small opacity-75">Savat holati</div>
+                <div class="value" id="heroCartCount">0 ta mahsulot</div>
+                <div class="small opacity-75" id="heroCartTotal">Savat checkout uchun tayyor</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <div class="quick-panel">
+          <div class="label mb-2">Qulaylik</div>
+          <div class="fw-bold fs-5 mb-1">Tiniq qidiruv tajribasi</div>
+          <div class="text-muted">Qidiruv, filtr va kategoriya signallari mahsulotlarni tezroq topishga yordam beradi.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="quick-panel">
+          <div class="label mb-2">Ishonch</div>
+          <div class="fw-bold fs-5 mb-1">Jonli buyurtma xulosasi</div>
+          <div class="text-muted">Foydalanuvchi buyurtma yuborishdan oldin item va total'ni ko'radi.</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="quick-panel">
+          <div class="label mb-2">Hisob</div>
+          <div class="fw-bold fs-5 mb-1">Kirish va tiklash oqimi</div>
+          <div class="text-muted">Ro'yxatdan o'tish, kirish va parolni tiklash bir sahifa ichida mavjud.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="promotions" class="alert promo-banner d-flex justify-content-between align-items-center mb-4" role="alert">
+      <div><strong>Bahorgi aksiya:</strong> Tanlangan laptoplarda 15% chegirma. Checkout vaqtida `SPRING15` kodidan
+        foydalaning.</div>
+      <div><button class="btn btn-sm btn-light" onclick="document.getElementById('search').focus();">Hozir
+          qidirish</button></div>
+    </div>
+
+    <section id="productsSection"
+      class="section-heading d-flex flex-column flex-lg-row justify-content-between align-items-lg-end mb-3 gap-3">
+      <div>
+        <div class="text-uppercase small fw-bold text-primary mb-2">Do'kon</div>
+        <h2 class="mb-1">Saralangan qurilmalarni ko'ring</h2>
+        <p class="text-muted mb-0">Hammasi tez ko'rish va kamroq chalg'ish uchun tartiblangan.</p>
+      </div>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span id="resultCount">0 ta mahsulot mavjud</span>
+      </div>
+    </section>
+
+    <div class="filters-card">
+      <div class="row g-3 align-items-center">
+        <div class="col-lg-7">
+          <label for="search" class="form-label small text-uppercase fw-bold text-muted mb-2">Katalog bo'yicha
+            qidiruv</label>
+          <div class="search-wrap">
+            <i class="bi bi-search"></i>
+            <input id="search" class="form-control" placeholder="Mahsulot nomi yoki tavsifi bo'yicha qidiring">
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <label for="categoryFilter" class="form-label small text-uppercase fw-bold text-muted mb-2">Kategoriya</label>
+          <select id="categoryFilter" class="form-select">
+            <option value="all">Barcha kategoriyalar</option>
+            <option value="laptop">Laptoplar</option>
+            <option value="phone">Telefonlar</option>
+            <option value="accessory">Aksessuarlar</option>
+          </select>
+        </div>
+        <div class="col-lg-2">
+          <label class="form-label small text-uppercase fw-bold text-muted mb-2">Savat jami</label>
+          <div id="filterCartSummary" class="status-pill justify-content-center w-100">$0.00</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="productsRow" class="row g-3"></div>
+
+  </div>
+
+  <footer class="footer-shell mt-4 py-3">
+    <div class="container page-shell">
+      <div class="row g-3 align-items-center pb-3 border-bottom border-secondary-subtle">
+        <div class="col-lg-4">
+          <div class="d-flex align-items-center gap-3">
+            <div class="footer-brand-mark">TH</div>
+            <div class="footer-brand-copy">
+              <div class="fw-bold text-light">Tech House</div>
+              <div class="text-muted small">Do'kon bilan bog'lanish va manzil</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="d-flex flex-wrap gap-2 justify-content-lg-end">
+            <a class="footer-pill footer-link d-inline-flex align-items-center gap-2" href="tel:+998901234567"><i class="bi bi-telephone"></i> +998 90 123 45 67</a>
+            <a class="footer-pill footer-link d-inline-flex align-items-center gap-2" href="mailto:support@techhouse.uz"><i class="bi bi-envelope"></i> support@techhouse.uz</a>
+            <div class="footer-pill d-inline-flex align-items-center gap-2"><i class="bi bi-clock"></i> Har kuni 09:00 - 22:00</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-2 align-items-center pt-3">
+        <div class="col-lg-8">
+          <div class="d-flex flex-wrap gap-3">
+            <div class="footer-note">Manzil: Toshkent shahri, Chilonzor tumani, Bunyodkor ko'chasi 7-uy</div>
+            <a class="footer-link footer-note" href="https://www.google.com/maps/search/?api=1&query=Toshkent+Chilonzor+Bunyodkor+7" target="_blank" rel="noopener noreferrer">Xaritani ochish</a>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="footer-note text-lg-end">&copy; 2026 Tech House demo store</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal fade" id="productDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Mahsulot tafsilotlari</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-4 align-items-start">
+            <div class="col-lg-6">
+              <img id="productDetailImg" class="product-detail-img" src="" alt="Mahsulot rasmi">
+            </div>
+            <div class="col-lg-6">
+              <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                <div>
+                  <div id="productDetailCategory" class="product-detail-meta mb-2"></div>
+                  <h3 id="productDetailTitle" class="mb-2"></h3>
+                </div>
+                <div id="productDetailPrice" class="price-tag"></div>
+              </div>
+              <p id="productDetailDesc" class="text-muted mb-4"></p>
+              <div id="productDetailLiveStatus" class="small text-muted mb-2"></div>
+              <div id="productDetailExtra" class="small text-muted mb-4"></div>
+              <a id="productDetailSource" class="small text-decoration-none d-none" href="#" target="_blank" rel="noopener noreferrer">Qo'shimcha havola</a>
+              <div class="d-flex flex-wrap gap-2">
+                <button id="productDetailAddBtn" type="button" class="btn btn-primary">
+                  <i class="bi bi-cart-plus me-1"></i> Savatga qo'shish
+                </button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Yopish</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="cartModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Savat</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="cartItems"></div>
+          <div class="d-flex justify-content-between align-items-center mt-3 flex-wrap gap-2">
+            <div id="cartSummary" class="fw-semibold">Jami: $0.00</div>
+            <div>
+              <button id="clearCart" class="btn btn-outline-danger me-2">Tozalash</button>
+              <button id="checkout" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#checkoutModal">Checkout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="checkoutModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Checkout</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <form id="checkoutForm" novalidate>
+          <div class="modal-body">
+            <div id="orderSummary" class="mb-3"></div>
+            <div class="row g-2">
+              <div class="col-12 col-md-6">
+                <label class="form-label">F.I.Sh.</label>
+                <input id="custName" class="form-control" required>
+                <div class="invalid-feedback">Iltimos, to'liq ismingizni kiriting.</div>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label">Email</label>
+                <input id="custEmail" type="email" class="form-control" required>
+                <div class="invalid-feedback">Yaroqli email manzilini kiriting.</div>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Manzil</label>
+                <input id="custAddress" class="form-control" required>
+                <div class="invalid-feedback">Iltimos, manzilingizni kiriting.</div>
+              </div>
+            </div>
+            <div class="mt-3 fw-semibold">Jami: <span id="orderTotal">$0.00</span></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+            <button id="placeOrderBtn" type="submit" class="btn btn-success">
+              <span id="placeOrderSpinner" class="spinner-border spinner-border-sm me-2 d-none" role="status"
+                aria-hidden="true"></span>
+              Buyurtma berish
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="ordersModal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Buyurtmalar tarixi</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+            <div class="small text-muted">Saqlangan buyurtmalar ro'yxati</div>
+            <div>
+              <button id="clearOrdersBtn" class="btn btn-sm btn-outline-danger">Hammasini tozalash</button>
+            </div>
+          </div>
+          <div id="ordersList"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="orderDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Buyurtma tafsilotlari</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="orderDetailsContent"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="registerModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Hisob yaratish</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <form id="registerForm" class="p-2" novalidate>
+          <div class="modal-body">
+            <div class="mb-2">
+              <label class="form-label">To'liq ism</label>
+              <input id="regName" class="form-control" required>
+              <div class="invalid-feedback">Iltimos, ismingizni kiriting.</div>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Email</label>
+              <input id="regEmail" type="email" class="form-control" required>
+              <div class="invalid-feedback">Yaroqli email kiriting.</div>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Parol</label>
+              <input id="regPassword" type="password" class="form-control" minlength="6" required>
+              <div class="invalid-feedback">Kamida 6 belgidan iborat parol kiriting.</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+            <button id="registerSubmit" type="submit" class="btn btn-success">Hisob yaratish</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Kirish</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <form id="loginForm" class="p-2">
+          <div class="modal-body">
+            <div class="mb-2">
+              <label class="form-label">Email</label>
+              <input id="loginEmail" type="email" class="form-control" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Parol</label>
+              <input id="loginPassword" type="password" class="form-control" required>
+              <div class="text-end mt-1">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal"
+                  class="small text-decoration-none">Parolni unutdingizmi?</a>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+            <button type="submit" class="btn btn-primary">Kirish</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="forgotPasswordModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Parolni tiklash</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <form id="forgotPasswordForm" class="p-2">
+          <div class="modal-body">
+            <p class="small text-muted">Reset kodini olish uchun emailingizni kiriting.</p>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input id="forgotEmail" type="email" class="form-control" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Kod yuborish</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="resetConfirmModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Yangi parol o'rnatish</h5>
+        </div>
+        <form id="resetConfirmForm" class="p-2">
+          <div class="modal-body">
+            <input id="resetToken" type="text" class="form-control mb-2" placeholder="6 xonali kodni kiriting" required>
+            <input id="resetNewPass" type="password" class="form-control" placeholder="Yangi parol" minlength="6"
+              required>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Parolni yangilash</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
