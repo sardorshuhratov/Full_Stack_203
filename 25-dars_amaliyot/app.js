@@ -88,7 +88,7 @@ app.put("/tasks/:id", (req, res) => {
             fs.writeFileSync(file, JSON.stringify(tasks));
             res.json(updatedTask);
         } else {
-            res.status(404).json({ error: "Task not found" });
+            res.status(404).json({ error: "Task topilmadi" });
         }
     } catch (error) {
         res.status(500).json({ error: "Failed to update task" });
