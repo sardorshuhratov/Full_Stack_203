@@ -1,0 +1,340 @@
+[
+  {
+    "id": 1,
+    "name": "Javohir",
+    "surname": "Abduvaliyev",
+    "age": 24,
+    "country": "O'zbekiston",
+    "weight": 75,
+    "gender": "Erkak"
+  },
+  {
+    "id": 2,
+    "name": "Sarah",
+    "surname": "Johnson",
+    "age": 29,
+    "country": "AQSH",
+    "weight": 62,
+    "gender": "Ayol"
+  },
+  {
+    "id": 3,
+    "name": "Hans",
+    "surname": "Müller",
+    "age": 35,
+    "country": "Germaniya",
+    "weight": 88,
+    "gender": "Erkak"
+  },
+  {
+    "id": 4,
+    "name": "Yumi",
+    "surname": "Tanaka",
+    "age": 22,
+    "country": "Yaponiya",
+    "weight": 50,
+    "gender": "Ayol"
+  },
+  {
+    "id": 5,
+    "name": "Ricardo",
+    "surname": "Silva",
+    "age": 31,
+    "country": "Braziliya",
+    "weight": 79,
+    "gender": "Erkak"
+  },
+  {
+    "id": 6,
+    "name": "Madina",
+    "surname": "Rustamova",
+    "age": 19,
+    "country": "O'zbekiston",
+    "weight": 55,
+    "gender": "Ayol"
+  },
+  {
+    "id": 7,
+    "name": "Michael",
+    "surname": "Smith",
+    "age": 42,
+    "country": "AQSH",
+    "weight": 92,
+    "gender": "Erkak"
+  },
+  {
+    "id": 8,
+    "name": "Petra",
+    "surname": "Schmidt",
+    "age": 27,
+    "country": "Germaniya",
+    "weight": 68,
+    "gender": "Ayol"
+  },
+  {
+    "id": 9,
+    "name": "Kenji",
+    "surname": "Sato",
+    "age": 40,
+    "country": "Yaponiya",
+    "weight": 70,
+    "gender": "Erkak"
+  },
+  {
+    "id": 10,
+    "name": "Beatriz",
+    "surname": "Santos",
+    "age": 25,
+    "country": "Braziliya",
+    "weight": 58,
+    "gender": "Ayol"
+  },
+  {
+    "id": 11,
+    "name": "Sardor",
+    "surname": "Ismoilov",
+    "age": 33,
+    "country": "O'zbekiston",
+    "weight": 82,
+    "gender": "Erkak"
+  },
+  {
+    "id": 12,
+    "name": "Emily",
+    "surname": "Davis",
+    "age": 30,
+    "country": "AQSH",
+    "weight": 65,
+    "gender": "Ayol"
+  },
+  {
+    "id": 13,
+    "name": "Lukas",
+    "surname": "Weber",
+    "age": 21,
+    "country": "Germaniya",
+    "weight": 74,
+    "gender": "Erkak"
+  },
+  {
+    "id": 14,
+    "name": "Sakura",
+    "surname": "Ito",
+    "age": 28,
+    "country": "Yaponiya",
+    "weight": 52,
+    "gender": "Ayol"
+  },
+  {
+    "id": 15,
+    "name": "Tiago",
+    "surname": "Oliveira",
+    "age": 37,
+    "country": "Braziliya",
+    "weight": 85,
+    "gender": "Erkak"
+  },
+  {
+    "id": 16,
+    "name": "Zuhra",
+    "surname": "Karimova",
+    "age": 26,
+    "country": "O'zbekiston",
+    "weight": 60,
+    "gender": "Ayol"
+  },
+  {
+    "id": 17,
+    "name": "James",
+    "surname": "Wilson",
+    "age": 50,
+    "country": "AQSH",
+    "weight": 95,
+    "gender": "Erkak"
+  },
+  {
+    "id": 18,
+    "name": "Karin",
+    "surname": "Wagner",
+    "age": 45,
+    "country": "Germaniya",
+    "weight": 72,
+    "gender": "Ayol"
+  },
+  {
+    "id": 19,
+    "name": "Hiroshi",
+    "surname": "Yamamoto",
+    "age": 32,
+    "country": "Yaponiya",
+    "weight": 76,
+    "gender": "Erkak"
+  },
+  {
+    "id": 20,
+    "name": "Camila",
+    "surname": "Ferreira",
+    "age": 23,
+    "country": "Braziliya",
+    "weight": 56,
+    "gender": "Ayol"
+  },
+  {
+    "id": 21,
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "id": null,
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "country": "O'zbekiston",
+    "gender": "Erkak"
+  }
+]
