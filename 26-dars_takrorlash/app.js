@@ -44,10 +44,54 @@ app.get('/api/users/:id', (req, res) => {
     } else {
       res.status(404).json({ error: 'Foydalanuvchi topilmadi' });
     }
-  } catch (error) { 
+  } catch (error) {
     res.status(500).json({ error: 'Xatolik yuz berdi' });
   }
 });
+
+app.post('/api/user', (req, res) => {
+  try {
+    const { name, age } = req.body;
+    const newUser = { id: users.length + 1, name, age };
+    users.push(newUser);
+    res.status(201).json(newUser);
+    console.log('Yangi foydalanuvchi qo\'shildi:', newUser);
+  } catch (error) {
+    res.status(500).json({ error: 'Xatolik yuz berdi' });
+  }
+});
+
+app.put('/api/user/:id', (req, res) => {
+  try {
+    const userId = parseInt(req.params.id);
+    const { name, age } = req.body;
+    const userIndex = users.findIndex(u => u.id === userId);
+    if (userIndex !== -1) {
+      users[userIndex] = { id: userId, name, age };
+      res.status(200).json(users[userIndex]);
+    } else {
+      res.status(404).json({ error: 'Foydalanuvchi topilmadi' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Xatolik yuz berdi' });
+  }
+});
+
+app.delete('/api/user/:id', (req, res) => {
+  try {
+    const userId = parseInt(req.params.id);
+    const userIndex = users.findIndex(u => u.id === userId);
+    if (userIndex !== -1) {
+      const deletedUser = users.splice(userIndex, 1);
+      res.status(200).json(deletedUser[0]);
+    } else {
+      res.status(404).json({ error: 'Foydalanuvchi topilmadi' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Xatolik yuz berdi' });
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Loyihamiz http://localhost:${port} da ishlayabdi`);
