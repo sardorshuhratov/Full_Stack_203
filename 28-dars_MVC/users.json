@@ -1,0 +1,73 @@
+[
+  {
+    "id": 3,
+    "name": "Dilnoza",
+    "age": 21
+  },
+  {
+    "id": 4,
+    "name": "Dilnoza",
+    "age": 21
+  },
+  {
+    "id": 5,
+    "name": "Dilnoza",
+    "age": 21
+  },
+  {
+    "id": 7,
+    "name": "Aziza",
+    "age": 19
+  },
+  {
+    "id": 8,
+    "name": "Aziza",
+    "age": 19
+  },
+  {
+    "id": 9,
+    "name": "Aziza",
+    "age": 19
+  },
+  {
+    "id": 10,
+    "name": "Aziza",
+    "age": 19
+  },
+  {
+    "id": 11,
+    "name": "Aziza",
+    "email": "aziza@example.com",
+    "age": 19
+  },
+  {
+    "id": 6,
+    "name": "Sardor",
+    "email": "sardor@gmail.com",
+    "age": 20
+  },
+  {
+    "id": 12,
+    "name": "Sardor",
+    "email": "sardor@gmail.com",
+    "age": 20
+  },
+  {
+    "id": 1,
+    "name": "Sardor",
+    "email": "sardor@gmail.com",
+    "age": 20
+  },
+  {
+    "id": 2,
+    "name": "Sardor",
+    "email": "sardor@gmail.com",
+    "age": 20
+  },
+  {
+    "id": 13,
+    "name": "Sardor",
+    "email": "sardor@gmail.com",
+    "age": 20
+  }
+]
