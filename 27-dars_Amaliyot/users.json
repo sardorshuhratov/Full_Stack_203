@@ -1,0 +1,39 @@
+[
+  {
+    "id": 2,
+    "name": "Zokir",
+    "email": "zokir@gmail.com",
+    "age": 24
+  },
+  {
+    "id": 3,
+    "name": "Ahmad",
+    "email": "ahmad@gmail.com",
+    "age": 26
+  },
+  {
+    "id": 4,
+    "name": "Dilnoza",
+    "email": "dilnoza@example.com",
+    "age": 21
+  },
+  {
+    "id": 5,
+    "name": "Dilnoza",
+    "email": "dilnoza@example.com",
+    "age": 21
+  },
+  {
+    "id": 6,
+    "name": "Alibek",
+    "email": "ali@new.com",
+    "age": 23,
+    "color": "red"
+  },
+  {
+    "id": 7,
+    "name": "Dilnoza",
+    "email": "dilnoza@example.com",
+    "age": 21
+  }
+]
