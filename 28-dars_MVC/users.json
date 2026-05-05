@@ -26,8 +26,9 @@
   },
   {
     "id": 9,
-    "name": "Aziza",
-    "age": 19
+    "name": "Sardor",
+    "age": 20,
+    "email": "sardor@gmail.com"
   },
   {
     "id": 10,

@@ -10,7 +10,7 @@ const file = path.join(__dirname, 'users.json');
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.json({ message: "Assalomu alaykum" });
+    res.json({ message: "Assalomu alaykum, mening toliq ismim Sardor Shuhratov" });
 });
 
 readUsers = () => {

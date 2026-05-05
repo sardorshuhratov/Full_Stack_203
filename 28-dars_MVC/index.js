@@ -7,7 +7,7 @@ app.use('/api/users', userRoutes);
 
 
 app.get('/', (req, res) => {
-    res.send('<h1>Welcome to User API');
+    res.send('<h1>Welcome');
 });
 
 app.listen(port, () => {
