@@ -12,6 +12,12 @@ out/
 .env
 **/.env
 
+users.json
+**/users.json
+
+students.json
+**/students.json
+
 Tech_House/java-backend/data/*.json
 Tech_House/java-backend/server.err.log
 Tech_House/java-backend/server.out.log
