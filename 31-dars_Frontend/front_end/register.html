@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asosiy saxifa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        body {
+            min-height: 100vh;
+            background: #f5f7fb;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.94) !important;
+            box-shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            display: inline-grid;
+            place-items: center;
+            background: #0d6efd;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .auth-card {
+            max-width: 520px;
+            border: 0;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+        <div class="container-fluid px-4 px-lg-5">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="./register.html">
+                <span class="brand-mark">S</span>
+                <span>Student App</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./register.html">Register</a>
+                    </li>
+                </ul>
+                <a class="btn btn-outline-primary" href="./login.html">Sign in</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container py-5">
+        <div class="card auth-card mx-auto">
+            <form class="card-body p-4 p-md-5" id="registerForm">
+                <h1 class="h3 text-center mb-2">Register</h1>
+                <p class="text-secondary text-center mb-4">Yangi account yaratish uchun maydonlarni to'ldiring</p>
+                <div class="mb-3">
+                    <label for="full_name" class="form-label">Full name</label>
+                    <input type="text" class="form-control form-control-lg" id="full_name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="age" class="form-label">Age</label>
+                    <input type="number" class="form-control form-control-lg" id="age" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control form-control-lg" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control form-control-lg" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg w-100">Register</button>
+                <div class="text-center mt-3">
+                    <a href="./login.html" class="link-primary text-decoration-none">Already have an account?</a>
+                </div>
+                <p id="message" class="text-danger small mt-3 mb-0 text-center"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <script>
+        const form = document.getElementById('registerForm');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+            console.log('Form submitted')
+            register();
+        })
+
+        async function register() {
+            const full_name = document.getElementById('full_name').value
+            const age = document.getElementById('age').value
+            const email = document.getElementById('email').value
+            const password = document.getElementById('password').value
+            const message = document.getElementById('message')
+
+            try {
+                message.innerHTML = ''
+                let userData = {
+                    full_name,
+                    age,
+                    email,
+                    password
+                }
+                const response = await fetch('http://localhost:3000/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                })
+                const data = await response.json()
+                console.log(data)
+                if (response.ok) {
+                    window.location.href = 'login.html'
+                } else {
+                    message.textContent = data.message
+                }
+            } catch (error) {
+                console.log(error)
+                message.textContent = "Server bilan aloqa yo'q"
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>

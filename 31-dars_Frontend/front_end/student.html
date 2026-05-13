@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        body {
+            min-height: 100vh;
+            background: #f5f7fb;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.94) !important;
+            box-shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            display: inline-grid;
+            place-items: center;
+            background: #0d6efd;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .student-card {
+            min-height: 100%;
+            border: 0;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+            overflow: hidden;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .student-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 34px rgba(16, 24, 40, 0.12);
+        }
+
+        .student-img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            background-color: #e9ecef;
+        }
+
+        .student-info {
+            font-size: 14px;
+        }
+
+        .student-info span {
+            color: #6c757d;
+        }
+
+        .search-input {
+            max-width: 720px;
+            height: 38px;
+            font-size: 14px;
+        }
+
+        .toolbar-button {
+            height: 38px;
+            white-space: nowrap;
+        }
+
+        .page-toolbar {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+        <div class="container-fluid px-4 px-lg-5">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="./index.html">
+                <span class="brand-mark">S</span>
+                <span>Student App</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./student.html">Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./profile.html">Profile</a>
+                    </li>
+                </ul>
+                <button class="btn btn-outline-danger" id="logoutBtn" type="button">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4">
+
+        <div class="page-toolbar d-flex flex-column flex-md-row justify-content-between gap-3 mb-4 p-3 p-md-4">
+            <div>
+                <h1 class="mb-1">Students</h1>
+                <p class="text-secondary mb-0">Barcha studentlar ro'yxati</p>
+            </div>
+            <div class="d-flex flex-column flex-sm-row gap-2 flex-grow-1 justify-content-md-end">
+                <input class="form-control search-input" type="search" id="searchInput"
+                    placeholder="Search by name, surname, direction or phone">
+                <button class="btn btn-primary toolbar-button" id="addStudentBtn" type="button">Add student</button>
+            </div>
+        </div>
+
+        <div class="alert d-none" id="message" role="alert"></div>
+        <div class="row g-4" id="studentsList"></div>
+    </main>
+
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="updateForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateModalLabel">Update student</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="studentId">
+                        <div class="mb-3">
+                            <label class="form-label" for="name">Name</label>
+                            <input class="form-control" id="name" type="text" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="surname">Surname</label>
+                            <input class="form-control" id="surname" type="text" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="age">Age</label>
+                            <input class="form-control" id="age" type="number" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="yonalishi">Direction</label>
+                            <input class="form-control" id="yonalishi" type="text" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="tel">Phone</label>
+                            <input class="form-control" id="tel" type="text" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="rasmi">Image URL</label>
+                            <input class="form-control" id="rasmi" type="url">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="saveStudentBtn">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api/students';
+        const token = localStorage.getItem('token');
+        const studentsList = document.getElementById('studentsList');
+        const searchInput = document.getElementById('searchInput');
+        const message = document.getElementById('message');
+        const updateModal = new bootstrap.Modal(document.getElementById('updateModal'));
+        const updateForm = document.getElementById('updateForm');
+        let editingStudentId = null;
+        let students = [];
+
+        if (!token) {
+            window.location.href = './login.html';
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            window.location.href = './login.html';
+        });
+
+        searchInput.addEventListener('input', () => {
+            renderStudents(filterStudents(searchInput.value));
+        });
+
+        document.getElementById('addStudentBtn').addEventListener('click', openAddModal);
+
+        updateForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            if (editingStudentId) {
+                await updateStudent();
+            } else {
+                await createStudent();
+            }
+        });
+
+        function headers() {
+            return {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            };
+        }
+
+        function showMessage(text, type = 'success') {
+            message.textContent = text;
+            message.className = `alert alert-${type}`;
+            setTimeout(() => {
+                message.className = 'alert d-none';
+            }, 2500);
+        }
+
+        async function getStudents() {
+            try {
+                studentsList.innerHTML = '<div class="col-12 text-secondary">Loading...</div>';
+                const response = await fetch(API_URL, {
+                    method: 'GET',
+                    headers: headers()
+                });
+
+                if (response.status === 401) {
+                    localStorage.removeItem('token');
+                    window.location.href = './login.html';
+                    return;
+                }
+
+                const result = await response.json();
+                if (!response.ok) {
+                    throw new Error(result.message || result.error || 'Students not found');
+                }
+
+                students = result.data || [];
+                renderStudents(students);
+            } catch (error) {
+                studentsList.innerHTML = '';
+                showMessage(error.message || "Server bilan aloqa yo'q", 'danger');
+            }
+        }
+
+        function filterStudents(value) {
+            const search = value.trim().toLowerCase();
+            if (!search) {
+                return students;
+            }
+
+            return students.filter((student) => {
+                return `${student.name} ${student.surname} ${student.yonalishi} ${student.tel}`
+                    .toLowerCase()
+                    .includes(search);
+            });
+        }
+
+        function renderStudents(data) {
+            if (!data.length) {
+                studentsList.innerHTML = '<div class="col-12 text-secondary">Student topilmadi</div>';
+                return;
+            }
+
+            studentsList.innerHTML = data.map((student) => `
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                    <div class="card student-card">
+                        <img src="${student.rasmi || 'https://via.placeholder.com/400x240?text=Student'}"
+                            class="student-img" alt="${student.name} ${student.surname}">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title mb-2">${student.name} ${student.surname}</h5>
+                            <div class="student-info mb-3">
+                                <p class="mb-1"><span>ID:</span> ${student.id}</p>
+                                <p class="mb-1"><span>Age:</span> ${student.age}</p>
+                                <p class="mb-1"><span>Direction:</span> ${student.yonalishi}</p>
+                                <p class="mb-0"><span>Phone:</span> ${student.tel}</p>
+                            </div>
+                            <div class="d-flex gap-2 mt-auto">
+                                <button class="btn btn-warning btn-sm w-50" type="button"
+                                    onclick="openUpdateModal(${student.id})">Edit</button>
+                                <button class="btn btn-danger btn-sm w-50" type="button"
+                                    onclick="deleteStudent(${student.id})">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openAddModal() {
+            editingStudentId = null;
+            updateForm.reset();
+            document.getElementById('studentId').value = '';
+            document.getElementById('updateModalLabel').textContent = 'Add student';
+            document.getElementById('saveStudentBtn').textContent = 'Create student';
+            updateModal.show();
+        }
+
+        function openUpdateModal(id) {
+            const student = students.find((item) => item.id == id);
+            if (!student) {
+                showMessage('Student topilmadi', 'danger');
+                return;
+            }
+
+            editingStudentId = student.id;
+            document.getElementById('studentId').value = student.id;
+            document.getElementById('name').value = student.name;
+            document.getElementById('surname').value = student.surname;
+            document.getElementById('age').value = student.age;
+            document.getElementById('yonalishi').value = student.yonalishi;
+            document.getElementById('tel').value = student.tel;
+            document.getElementById('rasmi').value = student.rasmi || '';
+            document.getElementById('updateModalLabel').textContent = 'Update student';
+            document.getElementById('saveStudentBtn').textContent = 'Save changes';
+            updateModal.show();
+        }
+
+        async function createStudent() {
+            const studentData = {
+                name: document.getElementById('name').value,
+                surname: document.getElementById('surname').value,
+                age: document.getElementById('age').value,
+                yonalishi: document.getElementById('yonalishi').value,
+                tel: document.getElementById('tel').value,
+                rasmi: document.getElementById('rasmi').value
+            };
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: headers(),
+                    body: JSON.stringify(studentData)
+                });
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.message || result.error || 'Create failed');
+                }
+
+                updateModal.hide();
+                showMessage('Student created successfully');
+                await getStudents();
+            } catch (error) {
+                showMessage(error.message || 'Create failed', 'danger');
+            }
+        }
+
+        async function updateStudent() {
+            const id = document.getElementById('studentId').value;
+            const studentData = {
+                name: document.getElementById('name').value,
+                surname: document.getElementById('surname').value,
+                age: document.getElementById('age').value,
+                yonalishi: document.getElementById('yonalishi').value,
+                tel: document.getElementById('tel').value,
+                rasmi: document.getElementById('rasmi').value
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/${id}`, {
+                    method: 'PUT',
+                    headers: headers(),
+                    body: JSON.stringify(studentData)
+                });
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.message || result.error || 'Update failed');
+                }
+
+                updateModal.hide();
+                showMessage('Student updated successfully');
+                await getStudents();
+            } catch (error) {
+                showMessage(error.message || 'Update failed', 'danger');
+            }
+        }
+
+        async function deleteStudent(id) {
+            const isConfirmed = confirm('Studentni ochirishni xohlaysizmi?');
+            if (!isConfirmed) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/${id}`, {
+                    method: 'DELETE',
+                    headers: headers()
+                });
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.message || result.error || 'Delete failed');
+                }
+
+                showMessage('Student deleted successfully');
+                await getStudents();
+            } catch (error) {
+                showMessage(error.message || 'Delete failed', 'danger');
+            }
+        }
+
+        getStudents();
+    </script>
+</body>
+
+</html>

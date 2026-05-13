@@ -1,0 +1,9 @@
+{
+  "name": "31-dars_frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm --prefix back_end start",
+    "server": "npm --prefix back_end start"
+  }
+}
